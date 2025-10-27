@@ -18,7 +18,6 @@
       Linuxissa oli ongelmia, joten latasin ja asensin sen kokonaan uudestaan virtuaalikoneeseen. Asennuksen jälkeen kaikki toimi normaalisti.
   
   ## b) Ei voi kalastaa
-  
 <img width="183" height="33" alt="h2" src="https://github.com/user-attachments/assets/9516890b-46e8-4f8b-8b81-50e344597f72" />
 
     - Katkaisin virtuaalikoneen Internet-yhteyden komennolla:
