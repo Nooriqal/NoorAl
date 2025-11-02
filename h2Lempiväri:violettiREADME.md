@@ -97,5 +97,29 @@ sudo nmap -T4 -vv -A -p 80 --script http-title --script-args "http.useragent=nma
 
 
 ## f) Net grep
+<img width="517" height="386" alt="Screenshot 2025-11-02 171512" src="https://github.com/user-attachments/assets/fc36b436-656f-4a3c-b0f8-104da146c579" />
 
-     
+
+
+     Asensin ngrep-komennon terminaalissa:
+               sudo apt update  
+               sudo apt install ngrep
+
+     Tarkistin verkkorajapinnan:
+               ip a
+          
+     Sen jälkeen käynistin sieppauksen komennolla:
+            sudo ngrep -d enp0s3 -W byline '(?i)nmap' -O nmap_hits.pcap |& tee nmap_hints.txt
+
+
+     Avasin toisen terminaalin ja testasin:
+               ping nmap.org
+
+     Palasin ensimmäiseen terminaaliin, jossa näkyi nmap-liikennettä.
+
+      Lopetin sieppauksen painamalla Ctrl + C.
+
+       
+
+<img width="515" height="172" alt="h3f" src="https://github.com/user-attachments/assets/099615b5-0222-476f-be9e-2f9473f86cfd" />
+
