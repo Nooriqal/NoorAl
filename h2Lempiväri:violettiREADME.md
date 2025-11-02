@@ -162,6 +162,28 @@ Ngrep sieppasi liikenteen onnistuneesti, ja Wiresharkissa näkyi eri User-Agent-
 
 
 
+## h) Pienemmät jäljet.
+
+<img width="475" height="200" alt="Screenshot 2025-11-02 191728" src="https://github.com/user-attachments/assets/81f850fa-5fc3-4db4-9d94-ad8a5bc7041a" />
+
+        Kuvassa näkyy, että ajoin komennon:  
+        sudo nmap -sS -p 80 --script http-title --script-args http.useragent="Mozilla/5.0" localhost
+        Eli suoritin nmap-skannauksen omaan localhost-palvelimeeni (portti 80) ja vaihdoin User-Agentin selaimen tyyliseksi (Mozilla/5.0).
+
+        Apache-lokissa näkyy seuraavaa:
+        "GET /nmaplowercheck..." HTTP/1.1 404 451 "-" "nmap-test"
+        User-Agent: "nmap-test" → siinä ei enää näy "Nmap Scripting Engine", joten User-Agent vaihtui onnistuneesti.
+        Silti lokissa näkyy edelleen nmapin jättämiä pyyntöjä, kuten /nmaplowercheck ja "nmap-test", jotka paljastavat, että kyseessä oli nmap-skannaus.
+
+        Lokin rivit, kuten:
+          - GET /sdk HTTP/1.1 404 451 "-" "nmap-test"
+          - GET /HNAP1 HTTP/1.1 404 451 "-" "nmap-test"
+        ovat osa http-title-skriptin testipyyntöjä. Ne kertovat, että vaikka User-Agent näyttää selaimelta, nmapin oma skripti tekee edelleen tunnistettavia pyyntöjä.
+
+Näin ollen User-Agentin vaihtaminen vähensi nmapin jälkiä, mutta ei poistanut niitä kokonaan, skannaus on edelleen tunnistettavissa lokista.
+
+
+
 
 
 
