@@ -1,4 +1,4 @@
-## a) Apache log:
+     ## a) Apache log:
      Vaiheet:
           1-Asensin ensin Apache2-palvelimen omaan virtuaalikoneeseeni komennolla:
           ( sudo apt-get install apache2) Asennus vaati internetin, joten tein sen ennen kuin katkaisin yhteyden.
@@ -123,3 +123,47 @@ sudo nmap -T4 -vv -A -p 80 --script http-title --script-args "http.useragent=nma
 
 <img width="515" height="172" alt="h3f" src="https://github.com/user-attachments/assets/099615b5-0222-476f-be9e-2f9473f86cfd" />
 
+
+## g) Agentti
+
+          Avasin kaksi terminaalia, A ja B, ja tein seuraavat vaiheet:
+          
+          Terminaali A:
+          Aloitin sieppauksen ngrep-ohjelmalla, joka kuunteli verkon liikennettä ja etsi User-Agent-tietoja.
+          sudo ngrep -d enp0s3 -W byline '(?i)User-Agent' -O ua_test.pcap |& tee ua_test.txt
+          # Tämä komento jäi pyörimään ja näytti kaikki paketit, joissa oli User-Agent-otsikko.# 
+
+          Terminaali B:
+          Suoritin kaksi nmap-testiä.
+          Ensin ajoin normaalin nmap-komennon ilman muutoksia:
+          sudo nmap -p80 --script http-title target.example.com
+
+          Sen jälkeen ajoin saman komennon, mutta muutin Nmapin User-Agentin näyttämään tavalliselta selaimelta:
+          sudo nmap -p80 --script http-title --script-args 'http.useragent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/116' target.example.com
+
+          Terminaali A :
+          Kun molemmat testit oli ajettu, pysäytin sieppauksen painamalla Ctrl + C.
+          Tarkistin tulokset etsimällä lokitiedostosta User-Agent-rivejä:
+          grep -i nmap ua_test.txt
+          grep -i mozilla ua_test.txt
+
+          Lopuksi avasin tallennetun pcap-tiedoston Wiresharkissa ja tarkistin, että User-Agent näkyi pakettien tiedoissa:
+          wireshark ua_test.pcap &
+
+
+
+          
+<img width="631" height="366" alt="h3g" src="https://github.com/user-attachments/assets/e6b713c5-f957-47f3-8a8f-034ae55c99af" />
+
+
+Testissä tarkkailin, miten Nmapin HTTP-pyyntöjen User-Agent voidaan muuttaa.
+Ngrep sieppasi liikenteen onnistuneesti, ja Wiresharkissa näkyi eri User-Agent-rivit – ensin Nmapin oma ja sen jälkeen muokattu selainversio.
+
+
+
+
+
+
+
+
+               
