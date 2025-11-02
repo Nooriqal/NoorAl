@@ -1,4 +1,19 @@
-     ## a) Apache log:
+
+## x)
+    # Tuskan pyramidi (Bianco 2013):
+    Tuskan pyramidi luokittelee hyökkäystä osoittavat merkit helpoista (esim. tiedostojen hashit, IP
+    osoitteet) vaikeimpiin (TTP:t). Mitä korkeammalla merkki on pyramidissa, sitä enemmän sen estäminen
+    pakottaa hyökkääjän muuttamaan toimintatapojaan — eli se aiheuttaa hänelle enemmän “kipua”. (Bianco,
+    2013)
+
+    # Timanttimalli (Caltagirone et al. 2013):
+     Timanttimallissa hyökkäys kuvataan neljänä solmukohtana: hyökkääjä, infrastruktuuri, kyvykkyys ja uhri,
+     ja niiden väliset yhteydet auttavat hahmottamaan, miten hyökkäys on toteutettu. Malli on
+     käytännöllinen, koska se ohjaa analyytikkoa etsimään todisteita näiden neljän osan välillä.
+     (Caltagirone ym., 2013)
+
+
+## a) Apache log:
      Vaiheet:
           1-Asensin ensin Apache2-palvelimen omaan virtuaalikoneeseeni komennolla:
           ( sudo apt-get install apache2) Asennus vaati internetin, joten tein sen ennen kuin katkaisin yhteyden.
@@ -184,6 +199,15 @@ Näin ollen User-Agentin vaihtaminen vähensi nmapin jälkiä, mutta ei poistanu
 
 
 
+
+## Lähteet :
+     https://nmap.org/nsedoc/scripts/http-title.html
+     https://nmap.org/nsedoc/scripts/http-useragent-tester.html
+     https://httpd.apache.org/docs/2.4/logs.html
+     https://www.sumologic.com/blog/apache-access-log
+     
+     
+     
 
 
 
