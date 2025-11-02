@@ -66,3 +66,36 @@ Nmap-skannauksen tulos osoittaa, että portti 80 on auki ja Apache 2.4.58 (Ubunt
 <img width="656" height="457" alt="h3c" src="https://github.com/user-attachments/assets/682e4da5-270f-4252-94c7-9e119583b157" />
 
           Lähde: https://nmap.org/book/nse.html
+
+## e) Wire sharking
+
+     Wiresharkilla tutkittiin, näkyykö Nmapin porttiskannauksen aiheuttama liikenne paikallisessa verkossa.  
+     Aluksi ohjelma ei näyttänyt mitään paketteja, vaikka kaappaus oli käynnissä, ja ruudulle tuli virheilmoitus:
+     “/usr/bin/dumpcap: No such file or directory”. Tämä osoitti, että dumpcap-komponentti puuttui eikä Wireshark pystynyt sieppaamaan liikennettä.
+     
+     Wireshark asennettiin uudelleen komennolla:
+     sudo apt install --reinstall wireshark-common wireshark
+     ja sille annettiin tarvittavat käyttöoikeudet, minkä jälkeen kaappaus alkoi toimia.
+
+     Tämän jälkeen dumpcapille annettiin käyttöoikeudet komennolla: 
+     sudo setcap cap_net_raw,cap_net_admin=eip /usr/bin/dumpcap
+     Kun nämä oli tehty, Wireshark alkoi toimia normaalisti ja kaappaus käynnistyi oikein.
+
+     Toiminta testattiin ensin ping-komennolla loopback-osoitteeseen (127.0.0.1), ja ICMP-paketit näkyivät onnistuneesti.  
+     Tämän jälkeen käynnistin uuden kaappauksen ja suoritin Nmap-skannauksen Apache-palvelimelle komennolla:
+
+sudo nmap -T4 -vv -A -p 80 --script http-title --script-args "http.useragent=nmap-test" localhost
+
+     Skannauksen aikana Wireshark tallensi liikenteen.  
+     Kun tulokset suodatettiin komennolla `http.user_agent contains "nmap"`, näkyi useita HTTP-paketteja, 
+     joissa User-Agent-kentässä oli teksti **“nmap-test”**.  
+     Tämä vahvisti, että Nmapin tekemä liikenne näkyi Wiresharkissa oikein, ja kaikki paketit kulkivat 
+     paikallisesti osoitteiden **127.0.0.1 ↔ 127.0.0.1** välillä.
+
+
+<img width="641" height="436" alt="h3e" src="https://github.com/user-attachments/assets/f64e4919-5641-4c32-bf2c-11e24051b633" />
+
+
+## f) Net grep
+
+     
