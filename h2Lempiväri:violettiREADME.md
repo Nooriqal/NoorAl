@@ -162,13 +162,7 @@ Terminaali A :
           grep -i mozilla ua_test.txt
 
 Lopuksi avasin tallennetun pcap-tiedoston Wiresharkissa ja tarkistin, että User-Agent näkyi pakettien tiedoissa:
-          wireshark ua_test.pcap &
-
-
-
-          
-<img width="631" height="366" alt="h3g" src="https://github.com/user-attachments/assets/e6b713c5-f957-47f3-8a8f-034ae55c99af" />
-
+    
 
 Testissä tarkkailin, miten Nmapin HTTP-pyyntöjen User-Agent voidaan muuttaa.
 Ngrep sieppasi liikenteen onnistuneesti, ja Wiresharkissa näkyi eri User-Agent-rivit – ensin Nmapin oma ja sen jälkeen muokattu selainversio.
