@@ -1,32 +1,32 @@
 # H1 Sniff
 
 ## x) Karvinen 2025: Wireshark - Getting Started
-    - Wireshark on ohjelma, jolla voi nähdä tietokoneen verkkoliinekenteen.
-    - Ohjelmalla voi tutkia, mitä paketteja kulkee verkossa.
-    - Sitä voi käyttää ongelmien etsimiseen, kuten miksi netti ei toimi.
+ - Wireshark on ohjelma, jolla voi nähdä tietokoneen verkkoliinekenteen.
+- Ohjelmalla voi tutkia, mitä paketteja kulkee verkossa.
+- Sitä voi käyttää ongelmien etsimiseen, kuten miksi netti ei toimi.
 
 ## x) Karvinen 2025: Network Interface Names on Linux
-    - Network interface tarkoittaa verkkolaitetta, joka yhdistää koneen verkkoon
-    - Jokaisella laitteella on oma nimi Linuxissa.
-    - Nimen alku keroo, millainen laite on
+ - Network interface tarkoittaa verkkolaitetta, joka yhdistää koneen verkkoon
+- Jokaisella laitteella on oma nimi Linuxissa.
+- Nimen alku keroo, millainen laite on
         - en=kaapeli (Ethernet)
         - wl=langaton(Wi-Fi)
         - lo=oma kone (loopback)
-    - Numerot nimen lopussa kertovat laiteen sijainnin tai MAC-osoitteen.
-    - Vanhoissa Linuxissa nimet kuten eth0 ja wlan0 saattoivat muuttua.
+- Numerot nimen lopussa kertovat laiteen sijainnin tai MAC-osoitteen.
+- Vanhoissa Linuxissa nimet kuten eth0 ja wlan0 saattoivat muuttua.
   ## a) Linux
-      Linuxissa oli ongelmia, joten latasin ja asensin sen kokonaan uudestaan virtuaalikoneeseen. Asennuksen jälkeen kaikki toimi normaalisti.
+   Linuxissa oli ongelmia, joten latasin ja asensin sen kokonaan uudestaan virtuaalikoneeseen. Asennuksen jälkeen kaikki toimi normaalisti.
   
   ## b) Ei voi kalastaa
 <img width="183" height="33" alt="h2" src="https://github.com/user-attachments/assets/9516890b-46e8-4f8b-8b81-50e344597f72" />
 
-    - Katkaisin virtuaalikoneen Internet-yhteyden komennolla:
+- Katkaisin virtuaalikoneen Internet-yhteyden komennolla:
         - sudo ip link set enp0s3 down
-     - Testasin ping-komennolla:
+    - Testasin ping-komennolla:
         - ping 1.1.1.1
         - Tulos oli " Network is unreachable", eli yhteys oli poikki.  
 
-     - Palautin yhdeyden komennolla:
+    - Palautin yhdeyden komennolla:
         - sudo ip link set enp0s3 up
         - Testasin uudelleen pingillä, ja nyt yhteys toimi (sain vastauksia "64 bytes from...").
         
@@ -43,16 +43,16 @@
 ## d) Oikeesti TCP/IP.
 <img width="602" height="40" alt="Screenshot 2025-10-22 182646" src="https://github.com/user-attachments/assets/986484e9-23e4-43ab-8d30-3abf05766816" />
 
--     1. Ethernet - Siirtää viestin verkosta laitteiden välillä ja näyttää MAC-osoitteet.
+ 1. Ethernet - Siirtää viestin verkosta laitteiden välillä ja näyttää MAC-osoitteet.
          (Tämä on alin kerros, joka vastaa fyysisesta siirrosta.
--     2. IP (IPv6)- kertoo mistä ja minne tieto kulkee. Tässä kuvassa on UPv6-osoitetta,
--     3. TCP- Huolehtii yhteyden hallinnasta ja siitä, että tieto menee perille oikeaan paikkaan. Tässä näkyy portti 443, joka kertoo, että kyseessä on HTTPS-yhteys
--     4. TLS- Suojaa yhteyden salauksella, joten liikenteen sisältöä ei näe. Tämä on sovelluskerroksen osa.
+ 2. IP (IPv6)- kertoo mistä ja minne tieto kulkee. Tässä kuvassa on UPv6-osoitetta,
+ 3. TCP- Huolehtii yhteyden hallinnasta ja siitä, että tieto menee perille oikeaan paikkaan. Tässä näkyy portti 443, joka kertoo, että kyseessä on HTTPS-yhteys
+ 4. TLS- Suojaa yhteyden salauksella, joten liikenteen sisältöä ei näe. Tämä on sovelluskerroksen osa.
 ## Eli viesti kulkee ensin Ethernetin ja IP:n kautta, sitten TCP pitää yhteyden yllä, ja lopuksi TLS salaa kaiken.
 
 ## e) Mitäs tuli surffattua?
-    Tämä ensimmäinen paketti on DNS-kysely, jossa tietokone pyytää verkolta osoitetta  www.google.com. 
-    Paketti kulkee neljän TCP/IP- kerroksen kautta.
+Tämä ensimmäinen paketti on DNS-kysely, jossa tietokone pyytää verkolta osoitetta  www.google.com. 
+Paketti kulkee neljän TCP/IP- kerroksen kautta.
         - 1 Ethernet -- lähettää paketin toisen laitteen kautta verkkoon.
         - 2 IP      -- Kertoo, mistä koneesta paketti tulee ja mihin se menee.
         - 3 UDP     -- Hoitaa tiedon kulun porttien kautta.
@@ -65,15 +65,15 @@
 
 ## h) Millä weppipalvelimella käyttäjä on surffaillut?
 
-    - Käyttäjä on ollut yhteydessä Googlen palvelimelle(www.google.com).
+- Käyttäjä on ollut yhteydessä Googlen palvelimelle(www.google.com).
      Tämä näkyy DNS-kyselyistä ennen salattua liikennettä.
      Yhteys on suojattu TLS/QUIC-salauksella, joten sivun tarkkaa sisältöä ei voi nähdä Wiresharkista.
 
 ## i) Analyysi
 <img width="435" height="76" alt="linuxwireshark" src="https://github.com/user-attachments/assets/3e03355f-ae92-4ab5-ad57-7cc960fdc5ab" />
 
-    - Tämä kaappaus on otettu Linuxin treminaalissa tcpdump-komennolla (sudo tcpdump -i enp0s3 -c 2)
-    - Kaappauksessa näkyy kaksi ensimmäistä pakettia, jotka liittyvät NTP-protokollaan (NTP). 
+- Tämä kaappaus on otettu Linuxin treminaalissa tcpdump-komennolla (sudo tcpdump -i enp0s3 -c 2)
+- Kaappauksessa näkyy kaksi ensimmäistä pakettia, jotka liittyvät NTP-protokollaan (NTP). 
     Tämä on palvelu, jota käytetään tietokoneen kellon synkronoimiseen internetissä olevaan aikapalvelimeen.
      IP-osoite on 10,0.2... ja palvelimen osoite on 91.189.91..
 - Paketti 1
