@@ -1,11 +1,8 @@
-x) Lue ja tiivistä. (Tässä x-alakohdassa ei tarvitse tehdä testejä tietokoneella, vain lukeminen tai kuunteleminen ja tiivistelmä riittää. Tiivistämiseen riittää muutama ranskalainen viiva.)
-Hubacek 2019: Universal Radio Hacker SDR Tutorial on 433 MHz radio plugs (Video, alkaen 3:19 ja päättyen 7:40. Yhteensä noin 4 min.)
-Cornelius 2022: Decode 433.92 MHz weather station data
-
-# Hubacek 2019: Universal Radio Hacker SDR Tutorial on 433 MHz radio plugs (Video, alkaen 3:19 ja päättyen 7:40. Yhteensä noin 4 min.) EI auennut
 
 
-# Cornelius 2022: Decode 433.92 MHz weather station data – tiivistelmä
+
+# x) Lue ja tiivistä.
+Cornelius 2022: Decode 433.92 MHz weather station data – tiivistelmä
 - Artikkelissa selitetään, miten 433.92 MHz sääasemat lähettävät tietoja lyhyinä radiosignaaleina.
 - Nämä signaalit ovat yleenäs ASK/OOK-moduloituja, eli plussit ovat joko päällä tai poiss.
 - Signaali voidaan kaapata SDR-laitteella ja avata ohjelmassa, kuten URH tai rtl_433
