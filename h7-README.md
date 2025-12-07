@@ -44,3 +44,43 @@ Dim: No
 
 Näyte sisältää toistuvia OFF-käskyjä, jotka vastaavat tilannetta, jossa käyttäjä painaa kaukosäätimen OFF-nappia useamman kerran. 433 MHz -laitteet lähettävät komennon aina useasti, jotta vastaanotin varmasti huomaa sen — tämä näkyi analyysissä selvästi.
 <img width="739" height="546" alt="image" src="https://github.com/user-attachments/assets/c70cd018-0f58-4a60-8344-16c549cbe9ca" />
+
+
+# d) Too compex 16? 
+
+Muutin URH-ohjelmalla tallennetun .complex16s näytteen rtl_433-yhteensopivaan muotoon vaihtamalla sen tiedostonimen oikeaan rakenteeseen.
+rtl_433 ei tarvitse varsinaista signaalimuunnosta – riittää, että tiedoston nimi sisältää taajuuden ja näytteenottotaajuuden.
+
+Siirryin jaettuun kansioon: Siirryin jaettuun kansioon:
+
+Nimesin URH:n tallentaman tiedoston uudelleen oikeaan muotoon: Nimesin URH:n tallentaman tiedoston uudelleen oikeaan muotoon:
+
+Analysoin näytteen rtl_433-ohjelmalla: Analysoin näytteen rtl_433-ohjelmalla:
+
+<img width="681" height="528" alt="image" src="https://github.com/user-attachments/assets/d0a5c3a6-100d-4d0e-a8c1-9500e1b562a3" />
+
+rtl_433-ohjelma katsoi tiedoston sisälle ja löysi sieltä monta eri 433 MHz radiolaitteen lähettämää viestiä.
+
+Näitä laitteita olivat esimerkiksi:
+
+- KlikAanKlikUit 
+- Proove-Security 
+- Nexa-Security
+
+rtl_433 purki jokaisen viestin, ja näytti:
+
+- mikä laitemalli lähetti viestin
+- mikä kanava (Channel 3)
+- mitä käskyä laite lähetti (OFF / ON)
+- millä hetkellä signaali tuli (aika)
+
+## e) Ultimate Asenna URH, the Ultimate Radio Hacker.
+
+En pystynyt asentamaan URH ohjelmaa, koska laitteessa ei ollut tarpeeksi vapaata tallennustilaa. Asennus keskeytyi virheeseen “No space left on device”, enkä saanut ohjelmaa toimimaan. Yritin vapauttaa tilaa, mutta sekään ei onnistunut, joten en saanut ohjelmaa asennettua.
+
+
+
+  
+
+
+
