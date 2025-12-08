@@ -22,9 +22,13 @@ Tarkistin nyt vain, että se toimii. Avasin terminaalin ja kirjoitin: rtl_433 -h
 
 # c) Automaattinen analyysi
 
-Toin näytetiedoston Linuxiin VirtualBoxin jaetun kansion avulla. Kun kansio näkyi polussa /media/sf_share, kopioin näytteen omaan kotihakemistoon:
-- cp /media/sf_share/Converted_433.92M_2000k.cs8 ~/
-Tämän jälkeen ajoin analyysin komennolla: Tämän jälkeen ajoin analyysin komennolla:
+Toin näytetiedoston Linuxiin VirtualBoxin jaetun kansion avulla. Kun kansio näkyi polussa:
+/media/sf_share
+
+kopioin näytteen omaan kotihakemistoon: - cp /media/sf_share/Converted_433.92M_2000k.cs8 ~/
+
+Tämän jälkeen ajoin analyysin komennolla: rtl_433 -r Converted_433.92M_2000k.cs8
+
 rtl_433 tunnisti näytteestä 433,92 MHz:n kaukosäätimen signaaleja. Viestit olivat KlikAanKlikUit/Nexa/Proove -tyyppisen pistorasialaitteen lähettämiä. Ohjelma löysi useita toistuvia OFF-komentoja samasta laitteesta.
 
 Analyysin tärkeimmät tunnistetiedot:
@@ -48,11 +52,13 @@ Näyte sisältää toistuvia OFF-käskyjä, jotka vastaavat tilannetta, jossa k�
 Muutin URH-ohjelmalla tallennetun .complex16s näytteen rtl_433-yhteensopivaan muotoon vaihtamalla sen tiedostonimen oikeaan rakenteeseen.
 rtl_433 ei tarvitse varsinaista signaalimuunnosta – riittää, että tiedoston nimi sisältää taajuuden ja näytteenottotaajuuden.
 
-Siirryin jaettuun kansioon: Siirryin jaettuun kansioon:
+Siirryin jaettuun kansioon: cd /media/sf_share
 
-Nimesin URH:n tallentaman tiedoston uudelleen oikeaan muotoon: Nimesin URH:n tallentaman tiedoston uudelleen oikeaan muotoon:
 
-Analysoin näytteen rtl_433-ohjelmalla: Analysoin näytteen rtl_433-ohjelmalla:
+Nimesin URH:n tallentaman tiedoston uudelleen oikeaan muotoon:mv Recorded-HackRF-20250411_183354-433_92MHz-2MSps-2MHz.complex16s HackRF_433.92M_2000k.cs8
+
+Analysoin näytteen rtl_433-ohjelmalla: rtl_433 -r HackRF_433.92M_2000k.cs8
+
 
 <img width="681" height="528" alt="image" src="https://github.com/user-attachments/assets/d0a5c3a6-100d-4d0e-a8c1-9500e1b562a3" />
 
